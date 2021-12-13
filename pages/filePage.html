@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handle File Data</title>
+    <style>
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      form {
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+      }
+      label,
+      input {
+        margin-top: 5px;
+        padding: 5px;
+      }
+      button {
+        margin-top: 15px;
+        padding: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Handle Files Using Express JS</h1>
+      <form action="" id="myForm">
+        <label for="username">Upload File:</label>
+        <input type="file" name="fileName" required />
+        <button onclick="ClickMe()">Submit</button>
+      </form>
+    </div>
+    <script>
+      const ClickMe = () => {
+        var mf = document.getElementById("myForm");
+        if (mf.checkValidity()) {
+          const formData = new FormData(mf);
+
+          //api call to server
+          fetch("http://localhost:3001/files", {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => {
+              console.log(res);
+              alert("File Data received.");
+            })
+            .then((err) => {
+              console.log(err);
+            });
+          //end
+        } else {
+          console.log("Please, fill out this form!!!");
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handle Form Data</title>
+    <style>
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      form {
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+      }
+      label,
+      input {
+        margin-top: 5px;
+        padding: 5px;
+      }
+      button {
+        margin-top: 15px;
+        padding: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Handle Form Data Using Express JS</h1>
+      <form action="" id="myForm">
+        <label for="username">User Name:</label>
+        <input type="text" name="uname" required />
+        <label for="userid">Eamil or Phone:</label>
+        <input type="text" name="uid" required />
+        <label for="upassword">Password:</label>
+        <input type="password" name="upass" required />
+        <button onclick="ClickMe()">submit</button>
+      </form>
+    </div>
+    <script>
+      const ClickMe = () => {
+        var mf = document.getElementById("myForm");
+        if (mf.checkValidity()) {
+          const formData = new FormData(mf);
+
+          //api call to server
+          fetch("http://localhost:3001/formdata", {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => {
+              console.log(res);
+              alert("Data received.");
+            })
+            .then((err) => {
+              console.log(err);
+            });
+          //end
+        } else {
+          console.log("Please, fill out this form!!!");
+        }
+      };
+    </script>
+  </body>
+</html>
